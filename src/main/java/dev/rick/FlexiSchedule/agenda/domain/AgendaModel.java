@@ -1,11 +1,13 @@
 package dev.rick.FlexiSchedule.agenda.domain;
 
+import dev.rick.FlexiSchedule.agenda.enums.AgendaStatus;
 import dev.rick.FlexiSchedule.reserva.domain.ReservaModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -17,8 +19,11 @@ public class AgendaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDateTime localDateTime;
-    private Boolean disponivel;
+    private AgendaStatus agendaStatus;
+    private LocalDate dia;
+    private LocalTime inicio;
+    private LocalTime fim;
+    private Integer duracao;
 
     @OneToMany(mappedBy = "agendaId")
     private List<ReservaModel> reservas;
@@ -31,19 +36,43 @@ public class AgendaModel {
         this.id = id;
     }
 
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+    public AgendaStatus getAgendaStatus() {
+        return agendaStatus;
     }
 
-    public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
+    public void setAgendaStatus(AgendaStatus agendaStatus) {
+        this.agendaStatus = agendaStatus;
     }
 
-    public Boolean getDisponivel() {
-        return disponivel;
+    public LocalDate getDia() {
+        return dia;
     }
 
-    public void setDisponivel(Boolean disponivel) {
-        this.disponivel = disponivel;
+    public void setDia(LocalDate dia) {
+        this.dia = dia;
+    }
+
+    public LocalTime getFim() {
+        return fim;
+    }
+
+    public void setFim(LocalTime fim) {
+        this.fim = fim;
+    }
+
+    public LocalTime getInicio() {
+        return inicio;
+    }
+
+    public void setInicio(LocalTime inicio) {
+        this.inicio = inicio;
+    }
+
+    public int getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(int duracao) {
+        this.duracao = duracao;
     }
 }
